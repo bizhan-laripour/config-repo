@@ -2,9 +2,23 @@ eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka
+  instance:
+    prefer-ip-address: true
 spring:
   application:
     name: gateway
+  cloud:
+    gateway:
+      routes:
+        - id: multipay
+          uri: http://127.0.0.1:9901/
+          predicates:
+            - Path=/**
+    discovery:
+      enabled: true
+  main:
+    web-application-type: reactive
 
 server:
   port: '8080'
+
